@@ -50,7 +50,7 @@ export function NewsSection() {
           </p>
 
           <Link
-            href="#"
+            href="/news"
             className="mt-12 lg:mt-[96px] inline-block w-full text-center lg:w-fit rounded-[18px] bg-del-primary px-8 py-4 text-base font-semibold text-white transition hover:bg-del-primary/90 shadow-lg"
           >
             View All Related News

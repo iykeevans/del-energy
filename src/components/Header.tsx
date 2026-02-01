@@ -29,18 +29,18 @@ export function Header() {
         About us
       </Link>
       <Link
-        href="#operations"
+        href="/operations"
         className="text-white transition hover:text-white/90"
       >
         Our Operations
       </Link>
       <Link
-        href="#careers"
+        href="/careers"
         className="text-white transition hover:text-white/90"
       >
         Careers
       </Link>
-      <Link href="#news" className="text-white transition hover:text-white/90">
+      <Link href="/news" className="text-white transition hover:text-white/90">
         News and Media
       </Link>
     </nav>
@@ -73,21 +73,21 @@ export function Header() {
                 About us
               </Link>
               <Link
-                href="#operations"
+                href="/operations"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-xl font-medium text-white transition hover:text-del-secondary"
               >
                 Our Operations
               </Link>
               <Link
-                href="#careers"
+                href="/careers"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-xl font-medium text-white transition hover:text-del-secondary"
               >
                 Careers
               </Link>
               <Link
-                href="#news"
+                href="/news"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-xl font-medium text-white transition hover:text-del-secondary"
               >

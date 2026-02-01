@@ -88,7 +88,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="#news"
+                href="/news"
                 className="text-sm text-white/70 hover:text-white transition-colors"
               >
                 News and Media
@@ -96,7 +96,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="#careers"
+                href="/careers"
                 className="text-sm text-white/70 hover:text-white transition-colors"
               >
                 Careers
