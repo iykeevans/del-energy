@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 export function Footer() {
   const [formData, setFormData] = useState({
@@ -17,20 +18,15 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#0A1C36] px-6 py-16 lg:px-12 lg:py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-3 lg:gap-16">
+    <footer className="px-6 py-16 lg:px-12 lg:py-24">
+      <div className="mx-auto grid max-w-[var(--del-max-screen-width)] gap-12 lg:grid-cols-3 lg:gap-16">
         <div>
-          <Link href="/" className="flex items-center gap-2">
-            <span className="h-3 w-3 rotate-45 bg-[#4ADE80]" aria-hidden />
-            <span className="text-xl font-semibold uppercase tracking-wide text-white">
-              DEL
-            </span>
-          </Link>
-          <h3 className="mt-6 text-sm font-semibold uppercase tracking-wider text-white">
+          <Image src="/logo.svg" alt="DEL Energy" width={129} height={51} />
+          <h3 className="mt-6 text-sm font-semibold tracking-wider text-white">
             Address
           </h3>
           <p className="mt-2 text-sm text-white/80">
-            LSDPC Mews, Oluwagbemi Street, Victoria Island, Lagos.
+            180B Moshood Olugbani Street, Victoria Island, Lagos
           </p>
           <div className="mt-4 flex gap-4">
             <a
@@ -64,7 +60,7 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+          <h3 className="text-sm font-semibold tracking-wider text-white">
             Quick Links
           </h3>
           <ul className="mt-4 space-y-2">
@@ -103,7 +99,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
+          <h3 className="text-sm font-semibold tracking-wider text-white">
             Contact us
           </h3>
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">

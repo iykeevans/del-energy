@@ -1,22 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --del-navy: #0a1c36;
-  --del-green: #4ade80;
-  --del-green-hover: #22c55e;
-  --del-blue: #1e3a5f;
+  --del-primary: #1068d4;
+  --del-secondary: #00b050;
+  --del-primary-darken-1: #001530;
+  --del-primary-darken-2: #093161;
+  --del-primary-darken-3: #003265;
+  --del-max-screen-width: 1338px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--del-primary-darken-1);
   --font-sans: var(--font-golos), system-ui, sans-serif;
+  --color-del-primary: var(--del-primary);
+  --color-del-secondary: var(--del-secondary);
+  --color-del-primary-darken-1: var(--del-primary-darken-1);
+  --color-del-primary-darken-2: var(--del-primary-darken-2);
+  --color-del-primary-darken-3: var(--del-primary-darken-3);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--del-primary-darken-1);
+  color: #fff;
   font-family: var(--font-sans);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.hero-video__linear-gradient {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 21, 48, 0.6) 0%,
+    rgba(0, 21, 48, 0.6) 100%
+  );
 }

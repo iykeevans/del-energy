@@ -1,18 +1,37 @@
-export function InvestmentSection() {
-  const partners = ["Synergy Capital", "Anergi", "Kuramo", "SANGO", "Fiatran"];
+import Image from "next/image";
 
+const partners = [
+  { name: "Synergy Capital", logo: "/images/synergy-capital.png" },
+  { name: "Anergi", logo: "/images/Anergi.svg" },
+  { name: "Kuramo", logo: "/images/KURAMO.svg" },
+  { name: "SANGO", logo: "/images/SANGO.svg" },
+  { name: "VIATHAN", logo: "/images/viathan.png" },
+];
+
+export function InvestmentSection() {
   return (
     <section className="bg-white px-6 py-16 lg:px-12 lg:py-24">
-      <p className="mb-12 text-center text-xs font-medium uppercase tracking-[0.2em] text-zinc-400">
+      <h2 className="mb-16 text-center text-[20px] font-medium uppercase tracking-[0.2em] text-[#003265]">
         Backed by an expert investment community
-      </p>
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-12 lg:gap-16">
-        {partners.map((name, i) => (
+      </h2>
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-16 gap-y-12 lg:gap-x-20">
+        {partners.map((partner, i) => (
           <div
             key={i}
-            className="flex h-12 items-center justify-center rounded border border-zinc-200 px-8 text-lg font-medium text-zinc-500"
+            className="relative not-last:flex h-[80px] w-[140px] border flex-1 basis-[140px] items-center justify-center"
           >
-            {name}
+            {partner.logo ? (
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                fill
+                className="w-full h-full object-contain object-center"
+              />
+            ) : (
+              <span className="text-center text-base font-medium text-[#003265]">
+                {partner.name}
+              </span>
+            )}
           </div>
         ))}
       </div>
