@@ -25,7 +25,7 @@ export function Header() {
       className="hidden lg:flex items-center gap-8"
       aria-label="Main navigation"
     >
-      <Link href="#about" className="text-white transition hover:text-white/90">
+      <Link href="/about" className="text-white transition hover:text-white/90">
         About us
       </Link>
       <Link
@@ -66,7 +66,7 @@ export function Header() {
           >
             <div className="flex flex-col gap-8 mt-12">
               <Link
-                href="#about"
+                href="/about"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-xl font-medium text-white transition hover:text-del-secondary"
               >
