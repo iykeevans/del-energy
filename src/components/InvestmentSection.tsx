@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const partners = [
-  { name: "Synergy Capital", logo: "/images/synergy-capital.png" },
   { name: "Anergi", logo: "/images/Anergi.svg" },
   { name: "Kuramo", logo: "/images/KURAMO.svg" },
   { name: "SANGO", logo: "/images/SANGO.svg" },

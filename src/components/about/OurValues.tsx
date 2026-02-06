@@ -3,29 +3,35 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer, slideInLeft } from "@/lib/animations";
+import Image from "next/image";
 
 interface ValueItem {
   title: string;
   description: string;
+  imageUrl: string;
 }
 
 const values: ValueItem[] = [
   {
+    imageUrl: "/images/discipline.svg",
     title: "Discipline",
     description:
       "Maintaining rigorous standards in planning, execution, and operations to ensure consistent delivery of quality energy solutions.",
   },
   {
+    imageUrl: "/images/delivery.svg",
     title: "Delivery",
     description:
       "Committed to executing projects on time and within budget, consistently meeting and exceeding stakeholder expectations.",
   },
   {
+    imageUrl: "/images/safety.svg",
     title: "Safety",
     description:
       "Prioritizing the wellbeing of our people, communities, and environment in every decision and operation we undertake.",
   },
   {
+    imageUrl: "/images/partnership.svg",
     title: "Partnership",
     description:
       "Collaborating with regulators, utilities, developers, and customers to accelerate energy delivery.",
@@ -92,9 +98,18 @@ export function OurValues() {
                   onClick={() => toggleValue(index)}
                   className="w-full flex items-center justify-between py-4 sm:py-5 text-left text-[#f3f3f3] cursor-pointer hover:text-del-secondary"
                 >
-                  <span className="text-lg sm:text-xl lg:text-2xl font-medium">
-                    {value.title}
-                  </span>
+                  <div className="flex items-center gap-x-5">
+                    <Image
+                      src={value.imageUrl}
+                      alt={value.title}
+                      width={20}
+                      height={35}
+                    />
+                    <span className="text-lg sm:text-xl lg:text-2xl font-medium">
+                      {value.title}
+                    </span>
+                  </div>
+
                   <ChevronIcon isOpen={openIndex === index} />
                 </button>
                 <AnimatePresence initial={false}>

@@ -5,7 +5,6 @@ import { fadeInUp, staggerContainer } from "@/lib/animations";
 import Image from "next/image";
 
 const partners = [
-  { name: "Synergy Capital", logo: "/images/synergy-capital.png" },
   { name: "Anergi", logo: "/images/Anergi.svg" },
   { name: "Kuramo", logo: "/images/KURAMO.svg" },
   { name: "Sango", logo: "/images/SANGO.svg" },

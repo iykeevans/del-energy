@@ -37,7 +37,8 @@ export function CurrentOpenings() {
             </p>
             <motion.div variants={fadeInUp} className="mt-8">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/decentralisedenergy/jobs/"
+                target="_blank"
                 className="inline-flex items-center justify-center px-6 py-3 bg-del-secondary text-white font-medium rounded-lg hover:bg-del-primary/90 transition-colors"
               >
                 Job openings

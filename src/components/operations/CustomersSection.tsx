@@ -51,7 +51,7 @@ const customers: Customer[] = [
     location: "Alaro City, Lekki Free Trade Zone",
     description:
       "Starium CNG Supply serves the Alaro City development in the Lekki Free Trade Zone.\n\nThe facility provides clean energy solutions for the modern industrial and commercial hub.",
-    image: "/images/customer-starium.jpg",
+    image: "/images/customer-starium.png",
   },
 ];
 
