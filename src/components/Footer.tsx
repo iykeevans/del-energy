@@ -80,7 +80,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                href="#operations"
+                href="/operations"
                 className="text-sm text-white/70 hover:text-white transition-colors"
               >
                 Our Operations

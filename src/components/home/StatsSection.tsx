@@ -4,10 +4,13 @@ import {
   motion,
   useInView,
   useMotionValue,
-  useSpring,
   useTransform,
+  animate,
 } from "framer-motion";
 import { useEffect, useRef } from "react";
+
+// Adjust this constant to control how many numbers the counter animates through
+const COUNTER_OFFSET = 1;
 
 const stats = [
   {
@@ -32,23 +35,15 @@ const stats = [
   },
 ];
 
-function Counter({
-  value,
-  numeric,
-  suffix,
-}: {
-  value: string;
-  numeric: number;
-  suffix: string;
-}) {
+function Counter({ numeric, suffix }: { numeric: number; suffix: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, {
-    damping: 30,
-    stiffness: 100,
-  });
-  const displayValue = useTransform(springValue, (latest) => {
+
+  // Start from close to the target, not from 0
+  const startValue = Math.max(0, numeric - COUNTER_OFFSET);
+  const motionValue = useMotionValue(startValue);
+
+  const displayValue = useTransform(motionValue, (latest) => {
     if (numeric >= 1000) {
       return Math.floor(latest).toLocaleString() + suffix;
     }
@@ -57,7 +52,11 @@ function Counter({
 
   useEffect(() => {
     if (isInView) {
-      motionValue.set(numeric);
+      const controls = animate(motionValue, numeric, {
+        duration: 1.5,
+        ease: "easeOut",
+      });
+      return () => controls.stop();
     }
   }, [isInView, motionValue, numeric]);
 
@@ -68,11 +67,7 @@ function StatItem({ stat }: { stat: (typeof stats)[0] }) {
   return (
     <div className="shrink-0">
       <div className="text-5xl font-medium text-white lg:text-[80px]">
-        <Counter
-          value={stat.value}
-          numeric={stat.numeric}
-          suffix={stat.suffix}
-        />
+        <Counter numeric={stat.numeric} suffix={stat.suffix} />
       </div>
       <div className="mt-2 text-lg text-white/80">{stat.label}</div>
     </div>

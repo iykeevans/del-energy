@@ -40,12 +40,11 @@ const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
     height="14"
     viewBox="0 0 14 14"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
     className="shrink-0"
   >
     <path
       d="M2 5L7 10L12 5"
-      stroke="#f3f3f3"
+      stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -91,9 +90,9 @@ export function OurValues() {
               >
                 <button
                   onClick={() => toggleValue(index)}
-                  className="w-full flex items-center justify-between py-4 sm:py-5 text-left cursor-pointer"
+                  className="w-full flex items-center justify-between py-4 sm:py-5 text-left text-[#f3f3f3] cursor-pointer hover:text-del-secondary"
                 >
-                  <span className="text-lg sm:text-xl lg:text-2xl font-medium text-[#f3f3f3]">
+                  <span className="text-lg sm:text-xl lg:text-2xl font-medium">
                     {value.title}
                   </span>
                   <ChevronIcon isOpen={openIndex === index} />

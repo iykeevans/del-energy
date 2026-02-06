@@ -163,7 +163,7 @@ export function Header() {
         }}
         aria-hidden={!isSticky}
       >
-        <div className="mx-auto flex max-w-[1338px] items-center justify-between rounded-full bg-[#115293] px-6 py-3 lg:px-8 lg:py-4 shadow-lg">
+        <div className="mx-auto flex max-w-[1338px] items-center justify-between rounded-2xl bg-[#115293] px-6 py-3 lg:px-8 lg:py-4 shadow-lg">
           {logoBlock}
           {navLinks}
           {hamburgerButton}
