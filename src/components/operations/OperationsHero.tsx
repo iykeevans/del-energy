@@ -8,17 +8,14 @@ export function OperationsHero() {
     <section className="mt-16 pb-20 sm:mt-20 lg:mt-[150px] px-4 sm:px-6 lg:px-12">
       <div className="mx-auto max-w-(--del-max-screen-width)">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 sm:gap-8 lg:gap-16 mb-8 sm:mb-12 lg:mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8 lg:gap-16 mb-8 sm:mb-12 lg:mb-16">
           <motion.div
             initial="initial"
             animate="animate"
             variants={slideInLeft}
-            className="lg:max-w-[539px]"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-medium leading-tight lg:leading-[72px] tracking-[-1px] lg:tracking-[-1.8px] text-white">
-              DEL Energy is the
-              <br />
-              connector.
+              Making Energy Flow
             </h1>
           </motion.div>
 
@@ -46,7 +43,7 @@ export function OperationsHero() {
           <img
             src="/images/operations-hero.jpg"
             alt="Energy infrastructure worker pointing to the horizon"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
         </motion.div>
       </div>

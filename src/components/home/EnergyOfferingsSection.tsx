@@ -10,7 +10,7 @@ const offerings = [
   "CNG virtual pipeline systems",
   "Gas distribution networks",
   "Dedicated power and gas infrastructure for industrial, commercial, and residential clusters",
-  "Distributed energy systems that scale.",
+  "Distributed energy systems that scale",
 ];
 
 export function EnergyOfferingsSection() {
@@ -25,7 +25,7 @@ export function EnergyOfferingsSection() {
 
   // Transform vertical scroll into horizontal movement
   // Adjust the output range based on content width
-  const x = useTransform(scrollYProgress, [0, 1], ["30%", "-40%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["30%", "-80%"]);
 
   return (
     <section
@@ -68,7 +68,7 @@ export function EnergyOfferingsSection() {
                   transition={{ delay: index * 0.1 }}
                   className="shrink-0 w-[300px] h-[260px] rounded-[20px] border border-del-primary p-[30px]"
                 >
-                  <p className="text-[22px] font-medium text-del-primary-darken-1 leading-relaxed">
+                  <p className="text-[22px] font-medium text-del-primary-darken-3 leading-7">
                     {offering}
                   </p>
                 </motion.div>
@@ -105,7 +105,7 @@ export function EnergyOfferingsSection() {
             className="mt-5"
           >
             <Link
-              href="/news"
+              href="/operations"
               className="inline-block rounded-[18px] bg-del-secondary text-white px-8 py-4 text-base font-semibold transition hover:bg-del-secondary/90 shadow-md"
             >
               Learn more

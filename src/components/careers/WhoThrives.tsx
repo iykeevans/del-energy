@@ -33,7 +33,7 @@ export function WhoThrives() {
               </p>
               <div className="mt-6 relative w-full h-[180px] sm:h-[220px] lg:h-[260px] rounded-xl overflow-hidden">
                 <img
-                  src="/images/solutions-section-image.png"
+                  src="/images/career-who-thrives.jpg"
                   alt="Solar panels installation"
                   className="w-full h-full object-cover"
                 />

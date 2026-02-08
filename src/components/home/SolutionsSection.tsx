@@ -10,22 +10,22 @@ const items = [
   {
     title: "Reliable Energy, Delivered Close to Demand",
     content:
-      "We focus on delivering energy directly to the source of demand, reducing transmission losses and improving reliability for our partners.",
+      "We develop decentralised power and gas systems that move energy directly to where demand exists: industries, clusters, estates, and economic hubs.",
   },
   {
     title: "Energy Solutions That Improve Industrial Performance",
     content:
-      "Our decentralised energy systems are designed to power industries efficiently, ensuring uninterrupted operations and cost savings.",
+      "DEL provides cleaner, more predictable, cost-stable energy that reduces reliance on diesel and improves productivity for manufacturers, estates, FTZs, and commercial operators.",
   },
   {
     title: "Partnership at the Core",
     content:
-      "We work closely with our clients to understand their energy needs and provide tailored solutions that drive growth.",
+      "We partner with customers and ecosystem players to deliver infrastructure that supports long-term economic growth. We also co-develop and finance energy projects that expand reliability and access across key industrial corridors.",
   },
   {
     title: "Operational Experience Backed by Capital",
     content:
-      "DEL brings more than a decade of practical experience delivering decentralised energy, strengthened by the institutional capital, and backed by an expert investment community.",
+      "DEL brings more than a decade of practical experience delivering decentralised energy, strengthened by the institutional capital and backed by an expert investment community.",
   },
 ];
 

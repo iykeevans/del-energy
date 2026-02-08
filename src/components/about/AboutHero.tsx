@@ -52,7 +52,7 @@ export function AboutHero() {
           <img
             src="/images/about-hero.jpg"
             alt="Energy infrastructure worker"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
         </motion.div>
       </div>

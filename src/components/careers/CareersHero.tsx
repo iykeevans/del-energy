@@ -28,7 +28,7 @@ export function CareersHero() {
           className="relative w-full h-[280px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-xl sm:rounded-2xl overflow-hidden"
         >
           <img
-            src="/images/operations-hero.jpg"
+            src="/images/career-hero.jpg"
             alt="DEL Energy team member at work"
             className="w-full h-full object-cover"
           />

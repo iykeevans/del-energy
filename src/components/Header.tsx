@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const STICKY_THRESHOLD = 80;
@@ -10,15 +10,35 @@ const STICKY_THRESHOLD = 80;
 export function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY >= STICKY_THRESHOLD);
+      const currentScrollY = window.scrollY;
+
+      // Determine scroll direction
+      if (currentScrollY > lastScrollY.current) {
+        setScrollDirection("down");
+      } else if (currentScrollY < lastScrollY.current) {
+        setScrollDirection("up");
+      }
+
+      lastScrollY.current = currentScrollY;
+
+      // Show sticky header only when:
+      // 1. Scrolled past threshold (original nav not visible)
+      // 2. AND scrolling upwards
+      const shouldShowSticky =
+        currentScrollY >= STICKY_THRESHOLD && scrollDirection === "up";
+
+      setIsSticky(shouldShowSticky);
     };
+
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrollDirection]);
 
   const navLinks = (
     <nav
@@ -163,7 +183,7 @@ export function Header() {
         }}
         aria-hidden={!isSticky}
       >
-        <div className="mx-auto flex max-w-[1338px] items-center justify-between rounded-2xl bg-[#115293] px-6 py-3 lg:px-8 lg:py-4 shadow-lg">
+        <div className="mx-auto flex max-w-[1338px] items-center justify-between rounded-2xl bg-del-primary-darken-2 px-6 py-3 lg:px-8 lg:py-4 shadow-lg">
           {logoBlock}
           {navLinks}
           {hamburgerButton}

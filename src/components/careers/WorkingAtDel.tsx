@@ -41,14 +41,6 @@ export function WorkingAtDel() {
               impact and your growth is actively supported, DEL Energy is the
               right place for you.
             </p>
-            <motion.div variants={fadeInUp} className="mt-8">
-              <Link
-                href="#current-openings"
-                className="inline-flex items-center justify-center px-6 py-3 bg-del-secondary text-white font-medium rounded-lg hover:bg-del-primary/90 transition-colors"
-              >
-                Job openings
-              </Link>
-            </motion.div>
           </motion.div>
         </div>
       </motion.div>

@@ -115,7 +115,7 @@ function StatItem({ stat }: { stat: (typeof stats)[0] }) {
 export function StatsSection() {
   return (
     <section className="bg-del-primary-darken-3 overflow-hidden py-14 lg:pt-16 lg:pb-20">
-      <h2 className="text-[#F3F3F3] text-[40px] font-medium mb-20 ml-[51px]">
+      <h2 className="text-[#F3F3F3] text-[40px] font-medium mb-20 mx-auto max-w-(--del-max-screen-width)">
         DEL at a Glance
       </h2>
       <div className="animate-marquee flex w-max gap-[113px] pr-[113px]">
