@@ -63,3 +63,8 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* 3D perspective for flip cards */
+.perspective-1000 {
+  perspective: 1000px;
+}
