@@ -56,7 +56,7 @@ function FlipCard({
       >
         {/* Front Side - Text */}
         <div
-          className="absolute inset-0 rounded-[20px] border border-del-primary p-[30px] bg-white"
+          className="absolute inset-0 rounded-[20px] border border-del-primary p-[30px]"
           style={{ backfaceVisibility: "hidden" }}
         >
           <p className="text-[22px] font-medium text-del-primary-darken-3 leading-7">
@@ -97,7 +97,7 @@ export function EnergyOfferingsSection() {
 
   // Transform vertical scroll into horizontal movement
   // Adjust the output range based on content width
-  const x = useTransform(scrollYProgress, [0, 1], ["30%", "-80%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["80%", "-80%"]);
 
   return (
     <section
@@ -125,7 +125,7 @@ export function EnergyOfferingsSection() {
           </motion.div>
 
           {/* Horizontal Scrolling Cards - Desktop */}
-          <div className="hidden lg:block relative h-[400px]">
+          <div className="hidden lg:block relative h-[300px]">
             <motion.div
               ref={cardsRef}
               style={{ x }}
@@ -152,7 +152,6 @@ export function EnergyOfferingsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-5"
           >
             <Link
               href="/operations"
