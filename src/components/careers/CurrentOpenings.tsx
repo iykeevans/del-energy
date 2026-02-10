@@ -32,8 +32,8 @@ export function CurrentOpenings() {
           {/* Right Content */}
           <motion.div variants={slideInRight} className="flex-1">
             <p className="text-base sm:text-lg text-del-primary-darken-1 leading-relaxed">
-              Explore opportunities to join a disciplined, high-performing team
-              shaping the future of Nigeria&apos;s energy sector.
+              Explore opportunities to join a high-performing team shaping the
+              future of Nigeria&apos;s energy sector.
             </p>
             <motion.div variants={fadeInUp} className="mt-8">
               <a

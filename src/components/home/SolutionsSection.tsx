@@ -25,7 +25,7 @@ const items = [
   {
     title: "Operational Experience Backed by Capital",
     content:
-      "DEL brings more than a decade of practical experience delivering decentralised energy, strengthened by the institutional capital and backed by an expert investment community.",
+      "DEL brings more than a decade of practical experience delivering decentralised energy, strengthened by institutional capital and backed by an expert investment community.",
   },
 ];
 
@@ -123,7 +123,7 @@ export function SolutionsSection() {
 
           <motion.div variants={fadeInUp}>
             <Link
-              href="#operations"
+              href="/operations"
               className="mt-10 inline-block w-fit rounded-[18px] bg-del-secondary text-white px-8 py-4 text-base font-semibold transition hover:bg-del-secondary/90 shadow-lg"
             >
               Learn more

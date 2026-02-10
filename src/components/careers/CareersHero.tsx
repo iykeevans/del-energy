@@ -15,7 +15,7 @@ export function CareersHero() {
           className="mb-8 sm:mb-12 lg:mb-16"
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-medium leading-tight lg:leading-[72px] tracking-[-1px] lg:tracking-[-1.8px] text-white">
-            Careers at DEL Energy
+            Careers at DEL
           </h1>
         </motion.div>
 

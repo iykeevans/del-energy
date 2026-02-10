@@ -23,14 +23,14 @@ export function WorkingAtDel() {
           {/* Left Title */}
           <motion.div variants={slideInLeft} className="lg:max-w-[400px]">
             <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-medium leading-tight lg:leading-[52px] tracking-[-0.4px] text-white">
-              Working at DEL Energy
+              Working at DEL
             </h2>
           </motion.div>
 
           {/* Right Content */}
           <motion.div variants={slideInRight} className="lg:max-w-[600px]">
             <p className="text-base sm:text-lg text-white/80 leading-relaxed">
-              At DEL Energy, we&apos;re building a disciplined, well-governed
+              At DEL, we&apos;re building a disciplined, well-governed
               organisation where talented professionals can grow, lead, and do
               work that truly matters. Here, we invest in our people, reward
               competence and ownership, and create long-term career paths for
