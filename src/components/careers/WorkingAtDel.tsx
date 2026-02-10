@@ -38,8 +38,8 @@ export function WorkingAtDel() {
             </p>
             <p className="mt-4 text-base sm:text-lg text-white/80 leading-relaxed">
               If you seek a workplace where your contributions have a measurable
-              impact and your growth is actively supported, DEL Energy is the
-              right place for you.
+              impact and your growth is actively supported, DEL is the right
+              place for you.
             </p>
           </motion.div>
         </div>
