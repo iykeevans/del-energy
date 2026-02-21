@@ -24,12 +24,41 @@ export function Footer() {
       <div className="mx-auto grid max-w-[var(--del-max-screen-width)] gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
         <div className="sm:col-span-2 lg:col-span-1">
           <Image src="/logo.svg" alt="DEL Energy" width={129} height={51} />
+
           <h3 className="mt-6 text-sm font-semibold tracking-wider text-white">
             Address
           </h3>
+
           <p className="mt-2 text-sm text-white/80 max-w-xs">
             180B Moshood Olugbani Street, Victoria Island, Lagos
           </p>
+
+          <h3 className="mt-10 text-sm font-semibold tracking-wider text-white">
+            Contact
+          </h3>
+
+          <h3 className="mt-8 text-xs font-semibold tracking-wider text-del-secondary">
+            General Enquiries
+          </h3>
+
+          <a
+            href="mailto:DEL-Projects@del.energy"
+            className="mt-1.5 text-xs text-white/80 max-w-xs"
+          >
+            DEL-Projects@del.energy
+          </a>
+
+          <h3 className="mt-6 text-xs font-semibold tracking-wider text-del-secondary">
+            Careers
+          </h3>
+
+          <a
+            href="mailto:careers@del.energy"
+            className="mt-1.5 text-xs text-white/80 max-w-xs"
+          >
+            careers@del.energy
+          </a>
+
           <div className="mt-6 flex gap-4">
             <motion.a
               whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.8)" }}
