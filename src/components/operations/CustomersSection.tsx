@@ -26,7 +26,7 @@ const customers: Customer[] = [
     name: "Island Power 2 (IPL2)",
     location: "Marina, Lagos State",
     description:
-      "Island Power 2 is a 6.0MW embedded power plant serving commercial customers (primarily large commercial office buildings) in the Marina district and VI Island. The plant operates on piped natural gas, with CNG backup. The plant features high-efficiency reciprocating engines designed for continuous baseload operation.”",
+      "Island Power 2 is a 6.0MW embedded power plant serving commercial customers (primarily large commercial office buildings) in the Marina district and VI Island. The plant operates on piped natural gas, with CNG backup. The plant features high-efficiency reciprocating engines designed for continuous baseload operation.",
     image: "/images/customer-ipl2.png",
   },
   {

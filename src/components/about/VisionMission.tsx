@@ -77,7 +77,7 @@ export function VisionMission() {
             </h2>
             <p className="mt-2 text-sm sm:text-base text-[#f3f3f3] leading-relaxed">
               To make cleaner, uninterrupted power a daily reality across
-              Nigeria and West Africa..
+              Nigeria and West Africa.
             </p>
           </div>
         </motion.div>
