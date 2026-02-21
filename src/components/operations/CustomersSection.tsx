@@ -19,38 +19,38 @@ const customers: Customer[] = [
     location: "Ibadan, Oyo State",
     description:
       "The SweetCo Power Plant is a 1.5MW captive power facility built to support the energy needs of SweetCo Foods, a leading candies and confectionery manufacturer.\n\nPowered by CNG and comprising a single 1.5MW MWM reciprocating engine, the plant delivers both electricity and heat through a CHP system.",
-    image: "/images/customer-sweetco.jpg",
+    image: "/images/customer-sweetco.png",
   },
   {
     id: "ipl2",
     name: "Island Power 2 (IPL2)",
     location: "Marina, Lagos State",
     description:
-      "Island Power 2 is a 15MW embedded power plant serving commercial and residential customers in the Marina district of Lagos Island.\n\nThe plant operates on natural gas and features high-efficiency reciprocating engines designed for continuous baseload operation.",
-    image: "/images/customer-ipl2.jpg",
+      "Island Power 2 is a 6.0MW embedded power plant serving commercial customers (primarily large commercial office buildings) in the Marina district and VI Island. The plant operates on piped natural gas, with CNG backup. The plant features high-efficiency reciprocating engines designed for continuous baseload operation.”",
+    image: "/images/customer-ipl2.png",
   },
   {
     id: "pipp",
     name: "PIPP Power Plant",
     location: "Ibadan, Oyo State",
     description:
-      "The PIPP Power Plant is a captive power facility providing reliable electricity to Premier Industrial Park in Ibadan.\n\nThe plant serves multiple industrial customers within the park with a total capacity designed to meet growing demand.",
-    image: "/images/customer-pipp.jpg",
+      "The PIPP Power Plant is an 8.5MW capacity facility of which DEL collocates 3.0MW. It is situated in Lekki Phase 1 and has a 15 km network that runs all the way through commercial and residential areas in Lekki, Ikoyi and Marina. From this facility DEL serves residential estates and commercial facilities.",
+    image: "/images/customer-pipp.png",
   },
   {
     id: "rumbu",
-    name: "Rumbu CNG Supply",
-    location: "Agbara, Lagos State",
+    name: "CNG Supply for Industries",
+    location: "",
     description:
-      "Rumbu CNG Supply provides compressed natural gas to industrial customers in the Agbara industrial corridor.\n\nThe facility ensures reliable gas supply for manufacturing operations in the region.",
+      "DEL supplies compressed natural gas to industrial customers in the Agbara industrial corridor, ensuring reliable gas supply for manufacturing operations in the region.",
     image: "/images/customer-rumbu.jpg",
   },
   {
     id: "starium",
-    name: "Starium CNG Supply",
-    location: "Alaro City, Lekki Free Trade Zone",
+    name: "Alaro City, Lekki Free Trade Zone",
+    location: "",
     description:
-      "Starium CNG Supply serves the Alaro City development in the Lekki Free Trade Zone.\n\nThe facility provides clean energy solutions for the modern industrial and commercial hub.",
+      "DEL supplies compressed natural gas to industrial customers in the Alaro City within the Lekki Free Trade Zone, ensuring reliable gas supply for large scale manufacturing operations in the zone",
     image: "/images/customer-starium.png",
   },
 ];

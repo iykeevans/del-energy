@@ -13,28 +13,29 @@ interface ValueItem {
 
 const values: ValueItem[] = [
   {
-    imageUrl: "/images/discipline.svg",
-    title: "Discipline",
+    // imageUrl: "/images/discipline.svg",
+    imageUrl: "/images/partnership.svg",
+    title: "Collaboration",
     description:
-      "Maintaining rigorous standards in planning, execution, and operations to ensure consistent delivery of quality energy solutions.",
+      "We look to partner with power developers, energy regulators, and maximum demand customers (factories, banks, residential estates) to provide cleaner. uninterrupted power supply",
   },
   {
     imageUrl: "/images/delivery.svg",
-    title: "Delivery",
+    title: "Ownership",
     description:
-      "Committed to executing projects on time and within budget, consistently meeting and exceeding stakeholder expectations.",
+      "We take action and own the full lifecycle, designing, financing, building and operating projects to deliver reliable energy where it's needed.",
   },
   {
-    imageUrl: "/images/safety.svg",
-    title: "Safety",
+    imageUrl: "/images/excellence.png",
+    title: "Excellence",
     description:
-      "Prioritizing the wellbeing of our people, communities, and environment in every decision and operation we undertake.",
+      "We deliver high quality services efficiently, safely and sustainably without compromise.",
   },
   {
-    imageUrl: "/images/partnership.svg",
-    title: "Partnership",
+    imageUrl: "/images/empathy.png",
+    title: "Empathy",
     description:
-      "Collaborating with regulators, utilities, developers, and customers to accelerate energy delivery.",
+      "We start with people, not just projects. We design and deliverenergy solutions around real customer needs, ensuring our work creates lasting, practical impact for the communities and businesses we serve.",
   },
 ];
 

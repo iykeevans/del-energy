@@ -50,7 +50,7 @@ export function AboutHero() {
           className="relative w-full h-[280px] sm:h-[400px] md:h-[500px] lg:h-[758px] rounded-xl sm:rounded-2xl overflow-hidden"
         >
           <img
-            src="/images/about-hero.jpg"
+            src="/images/del-facility.png"
             alt="Energy infrastructure worker"
             className="w-full h-full object-cover object-top"
           />
