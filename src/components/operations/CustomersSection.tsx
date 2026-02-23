@@ -32,7 +32,7 @@ const customers: Customer[] = [
   {
     id: "pipp",
     name: "PIPP Power Plant",
-    location: "Ibadan, Oyo State",
+    location: "Lekki Phase 1, Lagos State",
     description:
       "The PIPP Power Plant is an 8.5MW capacity facility of which DEL collocates 3.0MW. It is situated in Lekki Phase 1 and has a 15 km network that runs all the way through commercial and residential areas in Lekki, Ikoyi and Marina. From this facility DEL serves residential estates and commercial facilities.",
     image: "/images/customer-pipp.png",
