@@ -4,39 +4,45 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, slideInLeft } from "@/lib/animations";
 import Image from "next/image";
 
-interface TeamMember {
+export interface TeamMember {
+  id?: string;
   name: string;
   role: string;
   image: string;
   linkedin: string;
 }
 
-const teamMembers: TeamMember[] = [
+const fallbackTeamMembers: TeamMember[] = [
   {
+    id: "fallback-habeeb",
     name: "Habeeb Alebiosu",
     role: "Chief Executive Officer",
     image: "/images/staff-habeeb-alebiosu.jpg",
     linkedin: "https://www.linkedin.com/in/habeeb-alebiosu-262486a/",
   },
   {
+    id: "fallback-raymond",
     name: "Raymond Eromosele",
     role: "GM, Business Operations",
     image: "/images/staff-raymond-eromosele.jpg",
     linkedin: "https://www.linkedin.com/in/ray-eromosele-638485274/",
   },
   {
+    id: "fallback-seun",
     name: "Seun Lofinmakin",
     role: "GM, Services",
     image: "/images/staff-seun-lofinmakin.jpg",
     linkedin: "https://www.linkedin.com/in/seun-lofinmakin-10018522/",
   },
   {
+    id: "fallback-mide",
     name: "Mide Popoola",
     role: "GM, Commercial Operations",
     image: "/images/staff-mide-popoola.jpg",
     linkedin: "https://www.linkedin.com/in/mide-popoola-84482697/",
   },
   {
+    id: "fallback-tope",
     name: "Tope Opelusi",
     role: "GM, Projects",
     image: "/images/staff-tope-opelusi.jpg",
@@ -44,40 +50,50 @@ const teamMembers: TeamMember[] = [
   },
 ];
 
+function initialsFromName(name: string) {
+  return name
+    .split(/\s+/)
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 3)
+    .toUpperCase();
+}
+
 function TeamCard({ member }: { member: TeamMember }) {
-  return (
-    <motion.a
-      href={member.linkedin}
-      target="_blank"
-      rel="noopener noreferrer"
-      variants={fadeInUp}
-      className="flex flex-col w-full group cursor-pointer"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-    >
-      {/* Image with rounded corners */}
+  const hasLinkedIn = Boolean(member.linkedin && member.linkedin !== "#");
+  const shellClass =
+    "flex flex-col w-full group cursor-pointer";
+  const body = (
+    <>
       <div className="relative w-full aspect-[0.88] rounded-lg overflow-hidden">
         <div className="absolute inset-0 bg-[#f3f3f3]" />
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
-        />
-        {/* LinkedIn icon overlay on hover */}
-        <div className="absolute inset-0 bg-del-primary-darken-1/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <svg
-            className="w-8 h-8 sm:w-10 sm:h-10 text-white"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-        </div>
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 1024px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-del-primary/10 text-del-primary-darken-1 text-2xl font-medium tracking-tight">
+            {initialsFromName(member.name)}
+          </div>
+        )}
+        {hasLinkedIn ? (
+          <div className="absolute inset-0 bg-del-primary-darken-1/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <svg
+              className="w-8 h-8 sm:w-10 sm:h-10 text-white"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </div>
+        ) : null}
       </div>
 
-      {/* Info */}
       <div className="mt-4 sm:mt-5">
         <h3 className="text-lg sm:text-xl font-medium text-white leading-6 group-hover:text-del-primary transition-colors">
           {member.name}
@@ -86,11 +102,45 @@ function TeamCard({ member }: { member: TeamMember }) {
           {member.role}
         </p>
       </div>
-    </motion.a>
+    </>
+  );
+
+  if (hasLinkedIn) {
+    return (
+      <motion.a
+        href={member.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        variants={fadeInUp}
+        className={shellClass}
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.2 }}
+      >
+        {body}
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.div
+      variants={fadeInUp}
+      className={shellClass}
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
+    >
+      {body}
+    </motion.div>
   );
 }
 
-export function ManagementTeam() {
+type ManagementTeamProps = {
+  /** When set (including an empty array), replaces static fallback content. */
+  members?: TeamMember[];
+};
+
+export function ManagementTeam({ members }: ManagementTeamProps) {
+  const teamMembers = members !== undefined ? members : fallbackTeamMembers;
+
   return (
     <section className="bg-del-primary-darken-3 py-12 sm:py-16 lg:py-24">
       <div className="px-4 sm:px-6 lg:px-12">
@@ -120,9 +170,19 @@ export function ManagementTeam() {
             variants={staggerContainer}
             className="w-full lg:flex-1 grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10"
           >
-            {teamMembers.map((member) => (
-              <TeamCard key={member.name} member={member} />
-            ))}
+            {teamMembers.length === 0 ? (
+              <p className="col-span-full text-white/70 text-center sm:text-left">
+                Management team profiles will appear here once they are added in
+                the CMS.
+              </p>
+            ) : (
+              teamMembers.map((member) => (
+                <TeamCard
+                  key={member.id ?? `${member.name}-${member.role}`}
+                  member={member}
+                />
+              ))
+            )}
           </motion.div>
         </motion.div>
       </div>

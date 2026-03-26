@@ -6,7 +6,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { fadeInUp } from "@/lib/animations";
 
-export function NewsSection() {
+export type NewsSectionHighlight = {
+  title: string;
+  slug: string;
+};
+
+type NewsSectionProps = {
+  highlights?: NewsSectionHighlight[];
+};
+
+export function NewsSection({ highlights }: NewsSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,6 +57,21 @@ export function NewsSection() {
             Explore the latest developments, press releases, and announcements
             from DEL.
           </p>
+
+          {highlights && highlights.length > 0 ? (
+            <ul className="mt-8 space-y-3 border-t border-zinc-100 pt-8">
+              {highlights.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={`/news/${item.slug}`}
+                    className="text-base font-medium text-del-primary hover:underline leading-snug line-clamp-2"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
 
           <Link
             href="/news"
