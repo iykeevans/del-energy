@@ -7,8 +7,12 @@ import { InvestmentSection } from "@/components/InvestmentSection";
 import { EnergyOfferingsSection } from "@/components/home/EnergyOfferingsSection";
 import { NewsSection } from "@/components/home/NewsSection";
 import { Footer } from "@/components/Footer";
+import { getNewsArticles } from "@/utils/payload";
 
-export default function Home() {
+export default async function Home() {
+  const newsDocs = await getNewsArticles(3);
+  const highlights = newsDocs.map((d) => ({ title: d.title, slug: d.slug }));
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -19,7 +23,7 @@ export default function Home() {
         <StatsSection />
         <InvestmentSection />
         <EnergyOfferingsSection />
-        <NewsSection />
+        <NewsSection highlights={highlights} />
         <Footer />
       </main>
     </div>
