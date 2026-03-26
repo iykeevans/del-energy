@@ -1,18 +1,10 @@
 import type { NewsArticle } from "@/components/news/NewsArticleCard";
+import configPromise from "@payload-config";
+import { getPayload } from "payload";
+import "server-only";
 
-const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
-
-export interface PayloadResponse<T> {
-  docs: T[];
-  totalDocs: number;
-  limit: number;
-  totalPages: number;
-  page: number;
-  pagingCounter: number;
-  hasPrevPage: boolean;
-  hasNextPage: boolean;
-  prevPage: number | null;
-  nextPage: number | null;
+async function getPayloadClient() {
+  return getPayload({ config: configPromise });
 }
 
 export const NEWS_CATEGORY_LABELS: Record<string, string> = {
@@ -141,20 +133,13 @@ export function formatEmploymentType(value: string): string {
 }
 
 async function fetchCollection<T>(
-  path: string,
-  revalidateSeconds = 60,
+  finder: () => Promise<{ docs: unknown[] }>,
 ): Promise<T[]> {
   try {
-    const response = await fetch(`${API_URL}${path}`, {
-      next: { revalidate: revalidateSeconds },
-    });
-    if (!response.ok) {
-      return [];
-    }
-    const data: PayloadResponse<T> = await response.json();
-    return data.docs;
+    const data = await finder();
+    return data.docs as T[];
   } catch (e) {
-    console.error("Payload fetch error:", path, e);
+    console.error("Payload local API error:", e);
     return [];
   }
 }
@@ -165,20 +150,38 @@ async function fetchCollection<T>(
 export async function getNewsArticles(
   limit: number = 50,
 ): Promise<PayloadNewsDoc[]> {
-  return fetchCollection<PayloadNewsDoc>(
-    `/api/news?where[status][equals]=published&sort=-publishedDate&limit=${limit}&depth=1`,
-    60,
-  );
+  return fetchCollection<PayloadNewsDoc>(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "news",
+      where: {
+        status: {
+          equals: "published",
+        },
+      },
+      sort: "-publishedDate",
+      limit,
+      depth: 1,
+    });
+  });
 }
 
 export async function getNewsArticleBySlug(
   slug: string,
 ): Promise<PayloadNewsDoc | null> {
-  const encoded = encodeURIComponent(slug);
-  const docs = await fetchCollection<PayloadNewsDoc>(
-    `/api/news?where[slug][equals]=${encoded}&limit=1&depth=1`,
-    60,
-  );
+  const docs = await fetchCollection<PayloadNewsDoc>(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "news",
+      where: {
+        slug: {
+          equals: slug,
+        },
+      },
+      limit: 1,
+      depth: 1,
+    });
+  });
   const doc = docs[0];
   if (!doc || doc.status !== "published") return null;
   return doc;
@@ -188,30 +191,53 @@ export async function getNewsArticleBySlug(
  * Fetch team members from Payload CMS
  */
 export async function getTeamMembers(): Promise<PayloadTeamDoc[]> {
-  return fetchCollection<PayloadTeamDoc>(
-    `/api/team?sort=order&limit=100&depth=1`,
-    3600,
-  );
+  return fetchCollection<PayloadTeamDoc>(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "team",
+      sort: "order",
+      limit: 100,
+      depth: 1,
+    });
+  });
 }
 
 /**
  * Fetch open career positions from Payload CMS
  */
 export async function getOpenCareers(): Promise<PayloadCareerDoc[]> {
-  return fetchCollection<PayloadCareerDoc>(
-    `/api/careers?where[status][equals]=open&sort=-postedDate&limit=100&depth=0`,
-    3600,
-  );
+  return fetchCollection<PayloadCareerDoc>(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "careers",
+      where: {
+        status: {
+          equals: "open",
+        },
+      },
+      sort: "-postedDate",
+      limit: 100,
+      depth: 0,
+    });
+  });
 }
 
 export async function getCareerBySlug(
   slug: string,
 ): Promise<PayloadCareerDoc | null> {
-  const encoded = encodeURIComponent(slug);
-  const docs = await fetchCollection<PayloadCareerDoc>(
-    `/api/careers?where[slug][equals]=${encoded}&limit=1&depth=0`,
-    300,
-  );
+  const docs = await fetchCollection<PayloadCareerDoc>(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "careers",
+      where: {
+        slug: {
+          equals: slug,
+        },
+      },
+      limit: 1,
+      depth: 0,
+    });
+  });
   const doc = docs[0];
   if (!doc || doc.status !== "open") return null;
   return doc;
@@ -221,5 +247,13 @@ export async function getCareerBySlug(
  * Fetch services from Payload CMS
  */
 export async function getServices() {
-  return fetchCollection(`/api/services?sort=order&limit=100&depth=1`, 3600);
+  return fetchCollection(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "services",
+      sort: "order",
+      limit: 100,
+      depth: 1,
+    });
+  });
 }
