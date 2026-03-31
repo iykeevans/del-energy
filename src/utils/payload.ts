@@ -1,6 +1,8 @@
 import type { NewsArticle } from "@/components/news/NewsArticleCard";
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
+import { access } from "node:fs/promises";
+import path from "node:path";
 import "server-only";
 
 async function getPayloadClient() {
@@ -14,6 +16,36 @@ export const NEWS_CATEGORY_LABELS: Record<string, string> = {
   innovation: "Innovation",
   "press-release": "Press Release",
 };
+
+function safeDecodeURIComponent(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function toSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function buildSlugCandidates(input: string): string[] {
+  const decoded = safeDecodeURIComponent(input);
+  const values = [
+    input,
+    decoded,
+    input.trim(),
+    decoded.trim(),
+    toSlug(input),
+    toSlug(decoded),
+  ].filter(Boolean);
+
+  return [...new Set(values)];
+}
 
 export function formatPayloadDate(
   value: string | Date | null | undefined,
@@ -65,6 +97,26 @@ function normalizeMediaURL(url: string): string {
   return url.startsWith("/") ? url : `/${url}`;
 }
 
+async function localMediaExistsFromURL(url: string): Promise<boolean> {
+  // Only validate local media paths that should map to public/media on disk.
+  const normalized = normalizeMediaURL(url);
+  const filename = normalized.startsWith("/api/media/file/")
+    ? normalized.replace("/api/media/file/", "")
+    : normalized.startsWith("/media/")
+      ? normalized.replace("/media/", "")
+      : "";
+
+  if (!filename) return true;
+
+  const mediaPath = path.join(process.cwd(), "public", "media", filename);
+  try {
+    await access(mediaPath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Resolve media URL from either populated media object or media document ID.
  * If the relation is an ID string/number, it fetches the media document first.
@@ -81,8 +133,14 @@ export async function resolveMediaURL(media: unknown): Promise<string> {
         depth: 0,
       })) as unknown as PayloadMediaDoc;
 
-      if (doc?.url) return normalizeMediaURL(doc.url);
-      if (doc?.filename) return `/media/${doc.filename}`;
+      if (doc?.url) {
+        const normalized = normalizeMediaURL(doc.url);
+        return (await localMediaExistsFromURL(normalized)) ? normalized : "";
+      }
+      if (doc?.filename) {
+        const fallbackURL = `/media/${doc.filename}`;
+        return (await localMediaExistsFromURL(fallbackURL)) ? fallbackURL : "";
+      }
       return "";
     } catch (e) {
       console.error("Payload media lookup error:", e);
@@ -91,8 +149,14 @@ export async function resolveMediaURL(media: unknown): Promise<string> {
   }
 
   const m = media as { url?: string; filename?: string };
-  if (m.url) return normalizeMediaURL(m.url);
-  if (m.filename) return `/media/${m.filename}`;
+  if (m.url) {
+    const normalized = normalizeMediaURL(m.url);
+    return (await localMediaExistsFromURL(normalized)) ? normalized : "";
+  }
+  if (m.filename) {
+    const fallbackURL = `/media/${m.filename}`;
+    return (await localMediaExistsFromURL(fallbackURL)) ? fallbackURL : "";
+  }
   return "";
 }
 
@@ -240,14 +304,17 @@ export async function getNewsArticles(
 export async function getNewsArticleBySlug(
   slug: string,
 ): Promise<PayloadNewsDoc | null> {
+  const candidates = buildSlugCandidates(slug);
   const docs = await fetchCollection<PayloadNewsDoc>(async () => {
     const payload = await getPayloadClient();
     return payload.find({
       collection: "news",
       where: {
-        slug: {
-          equals: slug,
-        },
+        or: candidates.map((candidate) => ({
+          slug: {
+            equals: candidate,
+          },
+        })),
       },
       limit: 1,
       depth: 1,

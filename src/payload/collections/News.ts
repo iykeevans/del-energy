@@ -1,7 +1,38 @@
 import type { CollectionConfig } from 'payload'
 
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 export const News: CollectionConfig = {
   slug: 'news',
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (!data) return data
+
+        const title =
+          typeof data.title === 'string' ? data.title.trim() : ''
+        const currentSlug =
+          typeof data.slug === 'string' ? data.slug.trim() : ''
+
+        if (!currentSlug && title) {
+          data.slug = slugify(title)
+          return data
+        }
+
+        if (currentSlug) {
+          data.slug = slugify(currentSlug)
+        }
+
+        return data
+      },
+    ],
+  },
   access: {
     read: ({ req: { user } }) => {
       if (user) return true
