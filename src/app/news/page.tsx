@@ -1,4 +1,4 @@
-import { getNewsArticles, mapNewsDocToArticle } from "@/utils/payload";
+import { getNewsArticles, mapNewsDocToArticleResolved } from "@/utils/payload";
 import { NewsPageClient } from "./NewsPageClient";
 
 export const metadata = {
@@ -8,12 +8,16 @@ export const metadata = {
 
 export default async function NewsPage() {
   const docs = await getNewsArticles(80);
-  const newsArticles = docs
-    .filter((d) => d.category !== "press-release")
-    .map(mapNewsDocToArticle);
-  const pressReleases = docs
-    .filter((d) => d.category === "press-release")
-    .map(mapNewsDocToArticle);
+  const newsArticles = await Promise.all(
+    docs
+      .filter((d) => d.category !== "press-release")
+      .map(mapNewsDocToArticleResolved),
+  );
+  const pressReleases = await Promise.all(
+    docs
+      .filter((d) => d.category === "press-release")
+      .map(mapNewsDocToArticleResolved),
+  );
 
   return (
     <NewsPageClient newsArticles={newsArticles} pressReleases={pressReleases} />

@@ -54,6 +54,48 @@ export function getMediaURL(media: unknown): string {
   return "";
 }
 
+interface PayloadMediaDoc {
+  id: number | string;
+  url?: string | null;
+  filename?: string | null;
+}
+
+function normalizeMediaURL(url: string): string {
+  if (url.startsWith("http")) return url;
+  return url.startsWith("/") ? url : `/${url}`;
+}
+
+/**
+ * Resolve media URL from either populated media object or media document ID.
+ * If the relation is an ID string/number, it fetches the media document first.
+ */
+export async function resolveMediaURL(media: unknown): Promise<string> {
+  if (!media) return "";
+
+  if (typeof media === "string" || typeof media === "number") {
+    try {
+      const payload = await getPayloadClient();
+      const doc = (await payload.findByID({
+        collection: "media",
+        id: String(media),
+        depth: 0,
+      })) as unknown as PayloadMediaDoc;
+
+      if (doc?.url) return normalizeMediaURL(doc.url);
+      if (doc?.filename) return `/media/${doc.filename}`;
+      return "";
+    } catch (e) {
+      console.error("Payload media lookup error:", e);
+      return "";
+    }
+  }
+
+  const m = media as { url?: string; filename?: string };
+  if (m.url) return normalizeMediaURL(m.url);
+  if (m.filename) return `/media/${m.filename}`;
+  return "";
+}
+
 export interface PayloadNewsDoc {
   id: number | string;
   title: string;
@@ -69,6 +111,22 @@ export interface PayloadNewsDoc {
 
 export function mapNewsDocToArticle(doc: PayloadNewsDoc): NewsArticle {
   const imageUrl = getMediaURL(doc.featuredImage);
+  return {
+    id: String(doc.id),
+    title: doc.title,
+    excerpt: doc.excerpt,
+    slug: doc.slug,
+    placeholderColor: doc.placeholderColor || undefined,
+    date: formatPayloadDate(doc.publishedDate),
+    category: NEWS_CATEGORY_LABELS[doc.category] || doc.category,
+    image: imageUrl || undefined,
+  };
+}
+
+export async function mapNewsDocToArticleResolved(
+  doc: PayloadNewsDoc,
+): Promise<NewsArticle> {
+  const imageUrl = await resolveMediaURL(doc.featuredImage);
   return {
     id: String(doc.id),
     title: doc.title,
@@ -100,6 +158,19 @@ export interface PayloadTeamDoc {
 
 export function mapTeamDocToMember(doc: PayloadTeamDoc): TeamMemberPublic {
   const imageUrl = getMediaURL(doc.image);
+  return {
+    id: String(doc.id),
+    name: doc.name,
+    role: doc.role,
+    image: imageUrl,
+    linkedin: doc.linkedinUrl || "#",
+  };
+}
+
+export async function mapTeamDocToMemberResolved(
+  doc: PayloadTeamDoc,
+): Promise<TeamMemberPublic> {
+  const imageUrl = await resolveMediaURL(doc.image);
   return {
     id: String(doc.id),
     name: doc.name,

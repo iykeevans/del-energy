@@ -6,9 +6,9 @@ import { Footer } from "@/components/Footer";
 import { LexicalHtml } from "@/components/cms/LexicalHtml";
 import {
   formatPayloadDate,
-  getMediaURL,
   getNewsArticleBySlug,
   NEWS_CATEGORY_LABELS,
+  resolveMediaURL,
 } from "@/utils/payload";
 
 type Props = {
@@ -37,7 +37,7 @@ export default async function NewsArticlePage({ params }: Props) {
 
   const categoryLabel =
     NEWS_CATEGORY_LABELS[article.category] || article.category;
-  const imageUrl = getMediaURL(article.featuredImage);
+  const imageUrl = await resolveMediaURL(article.featuredImage);
   const dateLabel = formatPayloadDate(article.publishedDate);
 
   return (
