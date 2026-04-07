@@ -3,11 +3,8 @@ import { Footer } from "@/components/Footer";
 import { AboutHero } from "@/components/about/AboutHero";
 import { VisionMission } from "@/components/about/VisionMission";
 import { OurValues } from "@/components/about/OurValues";
-import { ManagementTeam } from "@/components/about/ManagementTeam";
+import { ManagementTeamSWR } from "@/components/about/ManagementTeamSWR";
 import { Partners } from "@/components/about/Partners";
-import { getTeamMembers, mapTeamDocToMemberResolved } from "@/utils/payload";
-
-export const revalidate = 60;
 
 export const metadata = {
   title: "About Us | DEL Energy",
@@ -16,10 +13,6 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const teamDocs = await getTeamMembers();
-  const cmsMembers = await Promise.all(teamDocs.map(mapTeamDocToMemberResolved));
-  const membersForDisplay = cmsMembers.length > 0 ? cmsMembers : undefined;
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -27,7 +20,7 @@ export default async function AboutPage() {
         <AboutHero />
         <VisionMission />
         <OurValues />
-        <ManagementTeam members={membersForDisplay} />
+        <ManagementTeamSWR />
         <Partners />
       </main>
       <Footer />

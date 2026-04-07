@@ -1,6 +1,7 @@
 import { buildConfig } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import sharp from 'sharp'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -11,6 +12,7 @@ import { Team } from './payload/collections/Team'
 import { Careers } from './payload/collections/Careers'
 import { Services } from './payload/collections/Services'
 import { Media } from './payload/collections/Media'
+import { Gallery } from './payload/collections/Gallery'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,8 +34,10 @@ export default buildConfig({
     Careers,
     Services,
     Media,
+    Gallery,
   ],
   editor: lexicalEditor({}),
+  sharp,
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_KEY_CHANGE_THIS',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

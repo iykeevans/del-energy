@@ -89,10 +89,7 @@ export const News: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
-        { label: 'Expansion', value: 'expansion' },
-        { label: 'Infrastructure', value: 'infrastructure' },
-        { label: 'Partnership', value: 'partnership' },
-        { label: 'Innovation', value: 'innovation' },
+        { label: 'News', value: 'news' },
         { label: 'Press Release', value: 'press-release' },
       ],
     },

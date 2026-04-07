@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "^3.79.1",
-    "@payloadcms/next": "^3.79.1",
+    "@payloadcms/next": "^3.80.0",
     "@payloadcms/richtext-lexical": "^3.79.1",
+    "css": "link:@payloadcms/next/css",
     "framer-motion": "^12.29.2",
     "next": "16.1.6",
-    "payload": "^3.79.1",
+    "payload": "^3.80.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "sharp": "^0.34.4",
+    "swr": "^2.4.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -27,6 +30,6 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "6.0.2"
   }
 }

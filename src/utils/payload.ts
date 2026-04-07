@@ -10,10 +10,7 @@ async function getPayloadClient() {
 }
 
 export const NEWS_CATEGORY_LABELS: Record<string, string> = {
-  expansion: "Expansion",
-  infrastructure: "Infrastructure",
-  partnership: "Partnership",
-  innovation: "Innovation",
+  news: "News",
   "press-release": "Press Release",
 };
 
@@ -173,6 +170,20 @@ export interface PayloadNewsDoc {
   featuredImage?: unknown;
 }
 
+export interface GalleryItem {
+  id: string;
+  title: string;
+  image: string;
+}
+
+export interface PayloadGalleryDoc {
+  id: number | string;
+  title: string;
+  image: unknown;
+  publishedDate?: string | null;
+  status: string;
+}
+
 export function mapNewsDocToArticle(doc: PayloadNewsDoc): NewsArticle {
   const imageUrl = getMediaURL(doc.featuredImage);
   return {
@@ -279,11 +290,15 @@ async function fetchCollection<T>(
   }
 }
 
+export type NewsCategory = "news" | "press-release";
+
 /**
- * Fetch published news articles from Payload CMS
+ * Fetch published news articles from Payload CMS.
+ * Pass `category` to filter in the database; omit it for all published categories.
  */
 export async function getNewsArticles(
   limit: number = 50,
+  category?: NewsCategory,
 ): Promise<PayloadNewsDoc[]> {
   return fetchCollection<PayloadNewsDoc>(async () => {
     const payload = await getPayloadClient();
@@ -293,6 +308,13 @@ export async function getNewsArticles(
         status: {
           equals: "published",
         },
+        ...(category
+          ? {
+              category: {
+                equals: category,
+              },
+            }
+          : {}),
       },
       sort: "-publishedDate",
       limit,
@@ -323,6 +345,38 @@ export async function getNewsArticleBySlug(
   const doc = docs[0];
   if (!doc || doc.status !== "published") return null;
   return doc;
+}
+
+export async function mapGalleryDocToItemResolved(
+  doc: PayloadGalleryDoc,
+): Promise<GalleryItem | null> {
+  const imageUrl = await resolveMediaURL(doc.image);
+  if (!imageUrl) return null;
+
+  return {
+    id: String(doc.id),
+    title: doc.title,
+    image: imageUrl,
+  };
+}
+
+export async function getGalleryItems(
+  limit: number = 120,
+): Promise<PayloadGalleryDoc[]> {
+  return fetchCollection<PayloadGalleryDoc>(async () => {
+    const payload = await getPayloadClient();
+    return payload.find({
+      collection: "gallery",
+      where: {
+        status: {
+          equals: "published",
+        },
+      },
+      sort: "-publishedDate",
+      limit,
+      depth: 1,
+    });
+  });
 }
 
 /**
